@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
 
     private float _moveX;       // Gets the movement vector; For flipping the player faceing direction
     private bool _isGrounded;
+    private bool _doubleJump = false;
 
     void Start()
     {
@@ -33,6 +34,11 @@ public class Player : MonoBehaviour
         if (Input.GetButtonDown("Jump") && _isGrounded)
         {
             Jump();
+           // _doubleJump = true;
+        }
+        else if (Input.GetButtonDown("Jump") && !_isGrounded && _doubleJump) {
+            _doubleJump = false;
+            Jump();
         }
     }
 
@@ -52,8 +58,10 @@ public class Player : MonoBehaviour
         RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, Vector2.down, _groundCheckDistance, _groundLayerMask.value);
         Debug.DrawRay(transform.position, Vector2.down * _groundCheckDistance, Color.green);        // Draws the raycast line
 
+        // if on ground
         if (hitInfo.collider != null)
         {
+            _doubleJump = true;
             return true;
         }
         else {
