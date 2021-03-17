@@ -209,6 +209,10 @@ MonoBehaviour:
   _rb: {fileID: 0}
   _moveSpeed: 5
   _jumpForce: 10
+  _groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  _groundCheckDistance: 0.7
 --- !u!1 &630000206
 GameObject:
   m_ObjectHideFlags: 0

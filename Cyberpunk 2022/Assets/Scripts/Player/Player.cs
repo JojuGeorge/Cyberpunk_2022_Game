@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public Rigidbody2D _rb;
+    [HideInInspector] public Rigidbody2D _rb;
 
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _jumpForce;
+    [SerializeField] private LayerMask _groundLayerMask;
+    [SerializeField] private float _groundCheckDistance;
 
     private float _moveX;       // Gets the movement vector; For flipping the player faceing direction
-    private Vector2 direction;
+    private bool _isGrounded;
 
     void Start()
     {
@@ -19,15 +21,19 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Jump")) {
-            Jump();
-        }
+        _isGrounded = CheckIfGrounded();
     }
 
     private void FixedUpdate()
     {
         // Player movement code
         Movement();
+
+        // Player Jump
+        if (Input.GetButtonDown("Jump") && _isGrounded)
+        {
+            Jump();
+        }
     }
 
 
@@ -39,5 +45,19 @@ public class Player : MonoBehaviour
 
     private void Jump() {
         _rb.velocity = new Vector2(_rb.velocity.x, _jumpForce);
+    }
+
+    private bool CheckIfGrounded() {
+        // Create a raycast from player position to under its feet
+        RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, Vector2.down, _groundCheckDistance, _groundLayerMask.value);
+        Debug.DrawRay(transform.position, Vector2.down * _groundCheckDistance, Color.green);        // Draws the raycast line
+
+        if (hitInfo.collider != null)
+        {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }
