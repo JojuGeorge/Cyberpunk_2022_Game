@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float _jumpForce;
 
     private float _moveX;       // Gets the movement vector; For flipping the player faceing direction
+    private Vector2 direction;
 
     void Start()
     {
@@ -18,7 +19,9 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        
+        if (Input.GetButtonDown("Jump")) {
+            Jump();
+        }
     }
 
     private void FixedUpdate()
@@ -30,9 +33,11 @@ public class Player : MonoBehaviour
 
     // Player movement
     private void Movement() {
+        _moveX = Input.GetAxisRaw("Horizontal") * _moveSpeed;
+        _rb.velocity = new Vector2(_moveX, _rb.velocity.y);
+    }
 
-        _moveX = Input.GetAxisRaw("Horizontal") * _moveSpeed * Time.fixedDeltaTime;
-
-        //_rb.MovePosition(new Vector2(_rb.position.x + _moveX, _rb.position.y));
+    private void Jump() {
+        _rb.velocity = new Vector2(_rb.velocity.x, _jumpForce);
     }
 }
