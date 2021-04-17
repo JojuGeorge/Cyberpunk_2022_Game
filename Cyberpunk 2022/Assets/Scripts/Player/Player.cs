@@ -11,13 +11,16 @@ public class Player : MonoBehaviour
     [SerializeField] private LayerMask _groundLayerMask;
     [SerializeField] private float _groundCheckDistance;
 
-    private float _moveX;       // Gets the movement vector; For flipping the player faceing direction
+    private float _moveX;                             // Gets the movement vector; For flipping the player faceing direction
     private bool _isGrounded;
     private bool _doubleJump = false;
+    private SpriteRenderer _playerSprite;             // For flipping the player based on direction facing
 
+    public int faceingDir = 1;      // 1 == right, -1 == left;
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _playerSprite = GetComponentInChildren<SpriteRenderer>();
     }
 
     void Update()
@@ -47,8 +50,32 @@ public class Player : MonoBehaviour
     private void Movement() {
         _moveX = Input.GetAxisRaw("Horizontal") * _moveSpeed;
         _rb.velocity = new Vector2(_moveX, _rb.velocity.y);
+
+        // To find which way is the player looking
+        if (_moveX > 0)
+        {
+            Flip(true);             // for flipping the player dir
+            faceingDir = 1;
+        }
+        else if (_moveX < 0)
+        {
+            Flip(false);
+            faceingDir = -1;
+        }
     }
 
+
+    // Change player faceing dir based on movement
+    private void Flip(bool faceingRight) {
+        if (faceingRight)
+        {
+            _playerSprite.flipX = false;
+        }
+        else
+        {
+            _playerSprite.flipX = true;
+        }
+    }
     private void Jump() {
         _rb.velocity = new Vector2(_rb.velocity.x, _jumpForce);
     }
