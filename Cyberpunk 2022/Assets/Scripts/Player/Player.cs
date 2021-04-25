@@ -16,11 +16,14 @@ public class Player : MonoBehaviour
     private bool _doubleJump = false;
     private SpriteRenderer _playerSprite;             // For flipping the player based on direction facing
 
+    // Test for flipping the gun
+    public SpriteRenderer _gunSprite;
+
     public int faceingDir = 1;      // 1 == right, -1 == left;
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
-        _playerSprite = GetComponentInChildren<SpriteRenderer>();
+        _playerSprite = GetComponentInChildren<SpriteRenderer>();   
     }
 
     void Update()
@@ -70,10 +73,12 @@ public class Player : MonoBehaviour
         if (faceingRight)
         {
             _playerSprite.flipX = false;
+            _gunSprite.flipX = false;               // for test only; for flipping gun
         }
         else
         {
             _playerSprite.flipX = true;
+            _gunSprite.flipX = true;                 // for test only; for flipping gun
         }
     }
     private void Jump() {
