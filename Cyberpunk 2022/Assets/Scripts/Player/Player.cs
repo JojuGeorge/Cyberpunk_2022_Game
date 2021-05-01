@@ -106,12 +106,20 @@ public class Player : MonoBehaviour, IDamageable
         }
     }
 
-    public void Damage( int damageAmount){
-        Health -= damageAmount;
+    public void Damage( int damageAmount){                  // From IDamageable interface; damageAmount from Attack.cs
+
+        if(Health < 1)              // so that the health wont be decreased on reaching 0 and go to minus value
+            return;
+
+        Health -= damageAmount;         
         Debug.Log("HEALTH = " + Health);
         
         if(Health < 1){
             Debug.Log("PLAYER IS DEAD!!!!!!!");
+
+            // Decrease life of player in LifeManager
+            // if there is more life for player then reset player in GameManager
+            GameManager.Instance.RespawnPlayer();
         }
     }
 }

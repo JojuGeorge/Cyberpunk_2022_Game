@@ -39,6 +39,8 @@
      <Compile Include="Assets\Scripts\Player\Player.cs" />
      <Compile Include="Assets\Scripts\IDamageable.cs" />
      <Compile Include="Assets\Scripts\Attack.cs" />
+     <Compile Include="Assets\Scripts\Checkpoint.cs" />
+     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Reference Include="UnityEngine">
         <HintPath>C:/Program Files/Unity/Hub/Editor/2020.3.1f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
