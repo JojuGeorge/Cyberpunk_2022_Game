@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IDamageable
 {
     [HideInInspector] public Rigidbody2D _rb;
+    public float Health { get; set; }
+
 
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _jumpForce;
@@ -15,6 +17,8 @@ public class Player : MonoBehaviour
     private bool _isGrounded;
     private bool _doubleJump = false;
     private SpriteRenderer _playerSprite;             // For flipping the player based on direction facing
+    [SerializedField]
+    private float _startHealth;     // test : for now mush show in inspector ; temporarily setting it to health
 
     // Test for flipping the gun
     public SpriteRenderer _gunSprite;
@@ -24,6 +28,7 @@ public class Player : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _playerSprite = GetComponentInChildren<SpriteRenderer>();   
+        Health = _startHealth;      // test ; temp setting startHealth to health
     }
 
     void Update()
@@ -98,6 +103,13 @@ public class Player : MonoBehaviour
         }
         else {
             return false;
+        }
+    }
+
+    public void Damage( int damageAmount){
+        Health -= damageAmount;
+        if(Health < 1){
+            console.log("PLAYER IS DEAD!!!!!!!");
         }
     }
 }
