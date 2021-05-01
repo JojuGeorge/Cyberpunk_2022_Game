@@ -17,7 +17,7 @@ public class Player : MonoBehaviour, IDamageable
     private bool _isGrounded;
     private bool _doubleJump = false;
     private SpriteRenderer _playerSprite;             // For flipping the player based on direction facing
-    [SerializedField]
+    [SerializeField]
     private float _startHealth;     // test : for now mush show in inspector ; temporarily setting it to health
 
     // Test for flipping the gun
@@ -108,8 +108,10 @@ public class Player : MonoBehaviour, IDamageable
 
     public void Damage( int damageAmount){
         Health -= damageAmount;
+        Debug.Log("HEALTH = " + Health);
+        
         if(Health < 1){
-            console.log("PLAYER IS DEAD!!!!!!!");
+            Debug.Log("PLAYER IS DEAD!!!!!!!");
         }
     }
 }

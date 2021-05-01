@@ -214,6 +214,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   _groundCheckDistance: 1.2
+  _startHealth: 10
   _gunSprite: {fileID: 368171288}
   faceingDir: 1
 --- !u!1 &278790648
@@ -780,6 +781,7 @@ GameObject:
   - component: {fileID: 1071781501}
   - component: {fileID: 1071781503}
   - component: {fileID: 1071781502}
+  - component: {fileID: 1071781504}
   m_Layer: 7
   m_Name: Spike
   m_TagString: Untagged
@@ -811,7 +813,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 6200000, guid: 3852dd1231bc1a849ad1694f24914bdb, type: 2}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -878,6 +880,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1071781504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1071781500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f5fb4174fb4b974e867f2905f0d079b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damageAmount: 1
 --- !u!1 &1156405480
 GameObject:
   m_ObjectHideFlags: 0
