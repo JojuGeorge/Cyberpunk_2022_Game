@@ -18,12 +18,12 @@ public class Player : MonoBehaviour, IDamageable
     private bool _doubleJump = false;
     private SpriteRenderer _playerSprite;             // For flipping the player based on direction facing
     [SerializeField]
-    private float _startHealth;     // test : for now mush show in inspector ; temporarily setting it to health
+    public float _startHealth;     // test : for now mush show in inspector ; temporarily setting it to health
 
-    // Test for flipping the gun
+    // Test for flipping the gun, temp setup
     public SpriteRenderer _gunSprite;
 
-    public int faceingDir = 1;      // 1 == right, -1 == left;
+    private int faceingDir = 1;      // 1 == right, -1 == left;
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();

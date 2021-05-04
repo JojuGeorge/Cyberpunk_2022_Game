@@ -40,9 +40,12 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator RespawnPlayerCO(){
         _player.enabled = false;
+        _player._rb.velocity = Vector2.zero;            // prevents player from sliding after death
 
         yield return new WaitForSeconds(_respawnDelay);
+
         _player.transform.position = currentCheckpoint.transform.position;
         _player.enabled = true;
+        _player.Health = _player._startHealth;          // test ; resetting health, temp solution
     }
 }
