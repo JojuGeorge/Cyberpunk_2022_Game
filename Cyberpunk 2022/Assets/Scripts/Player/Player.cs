@@ -12,24 +12,21 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] private float _jumpForce;
     [SerializeField] private LayerMask _groundLayerMask;
     [SerializeField] private float _groundCheckDistance;
-    [SerializeField] private GameObject _playerBody;
+    [SerializeField] private GameObject _playerBody;        // Main child of Player for flipping sprites and gun and fireing point
 
-    private float _moveX;                             // Gets the movement vector; For flipping the player faceing direction
+    private float _moveX;                                   // Gets the movement vector; For flipping the player faceing direction
     private bool _isGrounded;
     private bool _doubleJump = false;
-    //private SpriteRenderer _playerSprite;             // For flipping the player based on direction facing
     
 
     public float _startHealth;     // test : for now mush show in inspector ; temporarily setting it to health
 
-    // Test for flipping the gun, temp setup
-    //public SpriteRenderer _gunSprite;
+
 
     private int faceingDir = 1;      // 1 == right, -1 == left;
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
-        //_playerSprite = GetComponentInChildren<SpriteRenderer>();   
         Health = _startHealth;      // test ; temp setting startHealth to health
     }
 
@@ -79,25 +76,14 @@ public class Player : MonoBehaviour, IDamageable
     private void Flip(bool faceingRight) {
         if (faceingRight)
         {
-            //_playerSprite.flipX = false;
-            //_gunSprite.flipX = false;               // for test only; for flipping gun
-            // below option for flipping the player wont work, as the CinieMachine cam attacher to player flips too
-            //transform.Rotate(0f, 0f, 0f);
-            //transform.localRotation = Quaternion.Euler(0, 0, 0);
             _playerBody.transform.localRotation = Quaternion.Euler(0, 0, 0);
-
         }
         else
         {
-            //_playerSprite.flipX = true;
-            //_gunSprite.flipX = true;                 // for test only; for flipping gun
-            // below option for flipping the player wont work, as the CinieMachine cam attacher to player flips too
-            //transform.Rotate(0f, 180f, 0f);
-            //transform.localRotation = Quaternion.Euler(0, 180, 0);
             _playerBody.transform.localRotation = Quaternion.Euler(0, 180, 0);
-
         }
     }
+
     private void Jump() {
         _rb.velocity = new Vector2(_rb.velocity.x, _jumpForce);
     }
@@ -118,8 +104,8 @@ public class Player : MonoBehaviour, IDamageable
         }
     }
 
-    public void Damage( int damageAmount){                  // From IDamageable interface; damageAmount from Attack.cs
-        if (Health < 1)              // so that the health wont be decreased on reaching 0 and go to minus value
+    public void Damage( int damageAmount){     // From IDamageable interface; damageAmount from Attack.cs
+        if (Health < 1)                        // so that the health wont be decreased on reaching 0 and go to minus value
             return;
 
         Health -= damageAmount;         
