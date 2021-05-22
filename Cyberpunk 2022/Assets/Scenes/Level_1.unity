@@ -217,7 +217,6 @@ MonoBehaviour:
     m_Bits: 128
   _groundCheckDistance: 1.2
   _playerBody: {fileID: 978065787}
-  _startHealth: 5
 --- !u!114 &67072770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -241,13 +240,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 67072765}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c3e0535a9ed1f84aa2b86b2d475b656, type: 3}
+  m_Script: {fileID: 11500000, guid: 9f543243951d94e4a842b87997348922, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fullHealth: 5
-  fullLife: 2
-  data: 
-  pd: {fileID: 0}
 --- !u!1 &89916857
 GameObject:
   m_ObjectHideFlags: 0
@@ -277,7 +272,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ead094a82f4c85c4fbb0a176db9cb080, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeCounter: 2
+  life: 0
+  maxLife: 0
 --- !u!4 &89916859
 Transform:
   m_ObjectHideFlags: 0
@@ -322,7 +318,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentCheckpoint: {fileID: 0}
+  playerDataFileName: playerDataFile
+  enemyDataFileName: enemyDataFile
   _respawnDelay: 2
+  updated: 0
 --- !u!4 &266626597
 Transform:
   m_ObjectHideFlags: 0

@@ -7,42 +7,23 @@ using System;
 
 public class SaveData : MonoBehaviour
 {
-    //PlayerData pd = new PlayerData();
-    //public int fullHealth = 5;
-    //public int fullLife = 4;
-
-    //public string dataW;
-    //public string dataR;
-
-    //private void Start()
-    //{
-    //    pd.fullHealth = this.fullHealth;
-    //    pd.fullLife = this.fullLife;
-
-    //}
-
-    //public void Update()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.S))
-    //        Save();
-    //    if (Input.GetKeyDown(KeyCode.L))
-    //        Load();
-    //}
-
     private static SaveData _instance;
     public static SaveData Instance { get { return _instance; } }
 
+    private string destination; 
     private void OnEnable()
     {
         if (_instance == null)
         {
             _instance = this;
         }
+
+        destination = Application.persistentDataPath + "/";
     }
 
     public void Save<T>( T dataObject, string fileName) where T: class
     {
-        string destination = Application.persistentDataPath + "/" + fileName + ".dat";
+         destination += fileName + ".dat";
         string data = JsonConvert.SerializeObject(dataObject);
         File.WriteAllText(destination, data);
         Debug.Log("DATA SAVED" + data);    
@@ -51,25 +32,39 @@ public class SaveData : MonoBehaviour
     public T Load<T>(string fileName) where T: class
     {
         try {
-            string destination = Application.persistentDataPath + "/" + fileName + ".dat";
-            string data="null";
+            destination += fileName + ".dat";
+            string data ="null";
 
             if (File.Exists(destination)) {
                 data = File.ReadAllText(destination);
                 Debug.Log("DATA LOADED" + data);
+                // while converting it to obj if edited it gives error
+                // JsonReaderException: Additional text encountered after finished reading JSON content
+                return JsonConvert.DeserializeObject<T>(data);
             }
             else {
                 Debug.Log(destination + " FILE NOT FOUND!!");
             }
-
-            // while converting it to obj if edited it gives error
-            // JsonReaderException: Additional text encountered after finished reading JSON content
-            return JsonConvert.DeserializeObject<T>(data);
+            //return null;
         }
         catch (Exception e) {
             Debug.LogException(e);
         }
         return null;
+    }
+
+    // If file exists do nothing else create file with empty dataObject attributes
+    public void FileCreation<T>(T dataObject, string fileName) {
+        string path = destination +  fileName + ".dat";
+
+        if (File.Exists(path)) {
+            return;
+        }
+        else {
+            string data = JsonConvert.SerializeObject(dataObject);
+            File.WriteAllText(path, data);
+        }
+
     }
 }
 

@@ -6,13 +6,16 @@ public class GameManager : MonoBehaviour
 {
 
     public GameObject currentCheckpoint;            // Is set from checkpoint.cs to the currently passed checkpoint
-
+    public string playerDataFileName;
+    public string enemyDataFileName;
 
     [SerializeField] private float _respawnDelay;
 
     private Player _player;
     private PlayerData _playerData;
-    public bool updated;                            // initilly false, set to true in Player and LifeManager is enabled
+    private EnemyData _enemyData;
+    
+    [HideInInspector] public bool updated;                            // initilly false, set to true in Player and LifeManager is enabled
 
     private static GameManager _instance;
     public static GameManager Instance { get { return _instance; } }
@@ -36,7 +39,13 @@ public class GameManager : MonoBehaviour
     {
         _player = FindObjectOfType<Player>();
         _playerData = new PlayerData();
-        LoadJsonData();                               // Populate with json file, call last in Start() for proper population
+        _enemyData = new EnemyData();
+
+        // if file not exist then create data file to save the game data
+        SaveData.Instance.FileCreation<PlayerData>(_playerData, playerDataFileName);
+        SaveData.Instance.FileCreation<EnemyData>(_enemyData, enemyDataFileName);
+
+        LoadJsonData();                               // load data from json file, call last in Start() for proper population
     }
 
     void Update()
@@ -56,15 +65,15 @@ public class GameManager : MonoBehaviour
             LoadJsonData();
         }
 
-        // To check if Player and LifeManager is enabled then populate it with data
+        // When game starts populate from json data to game
+        // To check if Player and LifeManager is enabled then populate it with data 
         if (!updated) {
-            if (_player.enabled && LifeManager.Instance.enabled) {
+            if (_player.enabled && LifeManager.Instance.enabled) {              /// add checks to enemy also
                 LoadFromPlayerSaveData();
                 updated = !updated;
                 Debug.Log("updated = " + updated);
             }
         }
-
     }
 
     public void RespawnPlayer(){
@@ -81,7 +90,6 @@ public class GameManager : MonoBehaviour
         _player.transform.position = currentCheckpoint.transform.position;
         _player.enabled = true;
         _player.Health = _playerData.maxHealth;            // reset player health on death and respawn
-        
     }
 
 
@@ -91,12 +99,17 @@ public class GameManager : MonoBehaviour
 
     // Save data to Json
     public void SaveJsonData() {
-        SaveData.Instance.Save<PlayerData>(_playerData, "playerDataFile");
+        SaveData.Instance.Save<PlayerData>(_playerData, playerDataFileName);
+        SaveData.Instance.Save<EnemyData>(_enemyData, enemyDataFileName);               //test enemy part not complete
+        Debug.Log("Enemy data saved = " + _enemyData);
     }
 
     // Load data from Json
     public void LoadJsonData() {
-        _playerData = SaveData.Instance.Load<PlayerData>("playerDataFile");
+        _playerData = SaveData.Instance.Load<PlayerData>(playerDataFileName);
+        _enemyData = SaveData.Instance.Load<EnemyData>(enemyDataFileName);
+        Debug.Log("Enemy data loaded = " + _enemyData);
+
         if (updated)
             LoadFromPlayerSaveData();
     }
