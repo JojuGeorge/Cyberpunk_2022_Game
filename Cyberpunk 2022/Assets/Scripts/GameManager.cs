@@ -101,14 +101,12 @@ public class GameManager : MonoBehaviour
     public void SaveJsonData() {
         SaveData.Instance.Save<PlayerData>(_playerData, playerDataFileName);
         SaveData.Instance.Save<EnemyData>(_enemyData, enemyDataFileName);               //test enemy part not complete
-        Debug.Log("Enemy data saved = " + _enemyData);
     }
 
     // Load data from Json
     public void LoadJsonData() {
         _playerData = SaveData.Instance.Load<PlayerData>(playerDataFileName);
         _enemyData = SaveData.Instance.Load<EnemyData>(enemyDataFileName);
-        Debug.Log("Enemy data loaded = " + _enemyData);
 
         if (updated)
             LoadFromPlayerSaveData();

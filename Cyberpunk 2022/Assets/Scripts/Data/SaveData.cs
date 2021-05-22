@@ -10,20 +10,18 @@ public class SaveData : MonoBehaviour
     private static SaveData _instance;
     public static SaveData Instance { get { return _instance; } }
 
-    private string destination; 
+    private string destination;
     private void OnEnable()
     {
         if (_instance == null)
         {
             _instance = this;
         }
-
-        destination = Application.persistentDataPath + "/";
     }
 
     public void Save<T>( T dataObject, string fileName) where T: class
     {
-         destination += fileName + ".dat";
+        destination = Application.persistentDataPath + "/" + fileName + ".dat";
         string data = JsonConvert.SerializeObject(dataObject);
         File.WriteAllText(destination, data);
         Debug.Log("DATA SAVED" + data);    
@@ -32,7 +30,7 @@ public class SaveData : MonoBehaviour
     public T Load<T>(string fileName) where T: class
     {
         try {
-            destination += fileName + ".dat";
+            destination = Application.persistentDataPath + "/" + fileName + ".dat";
             string data ="null";
 
             if (File.Exists(destination)) {
@@ -55,14 +53,14 @@ public class SaveData : MonoBehaviour
 
     // If file exists do nothing else create file with empty dataObject attributes
     public void FileCreation<T>(T dataObject, string fileName) {
-        string path = destination +  fileName + ".dat";
+        destination = Application.persistentDataPath + "/" + fileName + ".dat";
 
-        if (File.Exists(path)) {
+        if (File.Exists(destination)) {
             return;
         }
         else {
             string data = JsonConvert.SerializeObject(dataObject);
-            File.WriteAllText(path, data);
+            File.WriteAllText(destination, data);
         }
 
     }
