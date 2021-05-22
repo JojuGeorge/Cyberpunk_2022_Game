@@ -5,8 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour, IDamageable
 {
     [HideInInspector] public Rigidbody2D _rb;
-    public float Health { get; set; }
-
+    public int Health { get; set; }                         // Player Health is initialized in the GameManager.LoadFromPlayerSaveData()
 
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _jumpForce;
@@ -17,22 +16,20 @@ public class Player : MonoBehaviour, IDamageable
     private float _moveX;                                   // Gets the movement vector; For flipping the player faceing direction
     private bool _isGrounded;
     private bool _doubleJump = false;
-    
-
-    public float _startHealth;     // test : for now mush show in inspector ; temporarily setting it to health
-
-
 
     private int faceingDir = 1;      // 1 == right, -1 == left;
+
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
-        Health = _startHealth;      // test ; temp setting startHealth to health
     }
+
 
     void Update()
     {
         _isGrounded = CheckIfGrounded();
+
+       
     }
 
     private void FixedUpdate()
@@ -108,20 +105,21 @@ public class Player : MonoBehaviour, IDamageable
         if (Health < 1)                        // so that the health wont be decreased on reaching 0 and go to minus value
             return;
 
-        Health -= damageAmount;         
+        Health -= damageAmount;
         
         if(Health < 1){
             Debug.Log("PLAYER IS DEAD!!!!!!!");
 
             LifeManager.Instance.TakeLife();
-            if (LifeManager.Instance.lifeCounter > 1) {
+            if (LifeManager.Instance.life >= 1) {
                 GameManager.Instance.RespawnPlayer();
             }
-            else { 
-                // reset player stat health to max health
+            else {
+               // _playerData.health = _playerData.maxHealth;             // reset player health on death
             }
 
             // if there is more life for player then reset player in GameManager
         }
+        GameManager.Instance.PopulatePlayerSaveData();
     }
 }

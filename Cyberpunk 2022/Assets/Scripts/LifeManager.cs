@@ -7,9 +7,10 @@ public class LifeManager : MonoBehaviour
     private static LifeManager _instance;
     public static LifeManager Instance { get { return _instance; } }
 
-    public int lifeCounter;             // later set it up with PlayerStatsSO
 
-    private int _maxLife;                // later set it up with PlayerStatsSO
+    [SerializeField] public int life;               // life and maxLife is initialied from GameManager.LoadFromPlayerSaveData();
+    [SerializeField] public int maxLife;                
+
     private Player _player;
 
     private void OnEnable()
@@ -24,19 +25,22 @@ public class LifeManager : MonoBehaviour
         _player = FindObjectOfType<Player>();
     }
 
+    // Add life on getting Life bonus
     public void GiveLife() {
-        if (lifeCounter < _maxLife) {
-            lifeCounter++;
+        if (life < maxLife) {
+            life++;
+            GameManager.Instance.PopulatePlayerSaveData();
         }
     }
 
     public void TakeLife() {
-        lifeCounter--;
+        life--;
 
-        if (lifeCounter < 1) {
-            lifeCounter = 0;
+        if (life < 1) {
+            life = 0;
             Debug.Log("GAME OVER!!!!!!!!!!!!!");
         }
+        GameManager.Instance.PopulatePlayerSaveData();
     }
 
 

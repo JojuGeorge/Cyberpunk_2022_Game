@@ -11,9 +11,17 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float _respawnDelay;
 
     private Player _player;
+    private PlayerData _playerData;
+    public bool updated;                            // initilly false, set to true in Player and LifeManager is enabled
 
     private static GameManager _instance;
     public static GameManager Instance { get { return _instance; } }
+
+    private void Awake()
+    {
+        //LoadJsonData();
+        updated = false;
+    }
 
     private void OnEnable()
     {
@@ -27,12 +35,36 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         _player = FindObjectOfType<Player>();
-        
+        _playerData = new PlayerData();
+        LoadJsonData();                               // Populate with json file, call last in Start() for proper population
     }
 
     void Update()
     {
-        
+        //test
+        // save data to json
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            PopulateSaveData();
+            SaveJsonData();
+        }
+
+        //test
+        // load data from json
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            LoadJsonData();
+        }
+
+        // To check if Player and LifeManager is enabled then populate it with data
+        if (!updated) {
+            if (_player.enabled && LifeManager.Instance.enabled) {
+                LoadFromPlayerSaveData();
+                updated = !updated;
+                Debug.Log("updated = " + updated);
+            }
+        }
+
     }
 
     public void RespawnPlayer(){
@@ -48,6 +80,38 @@ public class GameManager : MonoBehaviour
 
         _player.transform.position = currentCheckpoint.transform.position;
         _player.enabled = true;
-        _player.Health = _player._startHealth;          // test ; resetting health, temp solution
+        _player.Health = _playerData.maxHealth;            // reset player health on death and respawn
+        
+    }
+
+
+    public void PopulateSaveData() {
+        PopulatePlayerSaveData();
+    }
+
+    // Save data to Json
+    public void SaveJsonData() {
+        SaveData.Instance.Save<PlayerData>(_playerData, "playerDataFile");
+    }
+
+    // Load data from Json
+    public void LoadJsonData() {
+        _playerData = SaveData.Instance.Load<PlayerData>("playerDataFile");
+        if (updated)
+            LoadFromPlayerSaveData();
+    }
+
+
+    // Populate data with values for saving to Json, called before saving to Json
+    public void PopulatePlayerSaveData() {
+        _playerData.health = _player.Health;
+        _playerData.life = LifeManager.Instance.life;
+    }
+
+    // populate data from loaded Json to the game properties
+    public void LoadFromPlayerSaveData() {
+        _player.Health = _playerData.health;
+        LifeManager.Instance.life = _playerData.life;
+        LifeManager.Instance.maxLife = _playerData.maxLife;
     }
 }
