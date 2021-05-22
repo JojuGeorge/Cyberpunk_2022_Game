@@ -113,9 +113,15 @@ public class Player : MonoBehaviour, IDamageable
         if(Health < 1){
             Debug.Log("PLAYER IS DEAD!!!!!!!");
 
-            // Decrease life of player in LifeManager
+            LifeManager.Instance.TakeLife();
+            if (LifeManager.Instance.lifeCounter > 1) {
+                GameManager.Instance.RespawnPlayer();
+            }
+            else { 
+                // reset player stat health to max health
+            }
+
             // if there is more life for player then reset player in GameManager
-            GameManager.Instance.RespawnPlayer();
         }
     }
 }

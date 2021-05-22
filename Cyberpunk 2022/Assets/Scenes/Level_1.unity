@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 67072766}
   - component: {fileID: 67072769}
   - component: {fileID: 67072770}
+  - component: {fileID: 67072771}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -216,7 +217,7 @@ MonoBehaviour:
     m_Bits: 128
   _groundCheckDistance: 1.2
   _playerBody: {fileID: 978065787}
-  _startHealth: 10
+  _startHealth: 5
 --- !u!114 &67072770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,6 +232,66 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _fireingPoint: {fileID: 620971416}
   _projectilePrefab: {fileID: 6710243224730572908, guid: 5dad4d98c0e6c114fa7df370303bb442, type: 3}
+--- !u!114 &67072771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 67072765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c3e0535a9ed1f84aa2b86b2d475b656, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fullHealth: 5
+  fullLife: 2
+  data: 
+  pd: {fileID: 0}
+--- !u!1 &89916857
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 89916859}
+  - component: {fileID: 89916858}
+  m_Layer: 0
+  m_Name: LifeManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &89916858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89916857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ead094a82f4c85c4fbb0a176db9cb080, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeCounter: 2
+--- !u!4 &89916859
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89916857}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &266626595
 GameObject:
   m_ObjectHideFlags: 0
