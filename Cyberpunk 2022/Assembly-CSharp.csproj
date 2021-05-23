@@ -70,6 +70,7 @@
     <Compile Include="Assets\Scripts\Data\SaveData.cs" />
     <Compile Include="Assets\Scripts\Player\Player.cs" />
     <Compile Include="Assets\Scripts\Data\EnemyData.cs" />
+    <Compile Include="Assets\Scripts\Menus\MainMenu.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\JsonDotNet\link.xml" />
