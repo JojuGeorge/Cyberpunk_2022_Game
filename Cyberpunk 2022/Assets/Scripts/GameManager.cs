@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     private PlayerData _playerData;
     private EnemyData _enemyData;
     
-    [HideInInspector] public bool updated;                            // initilly false, set to true in Player and LifeManager is enabled
+    [HideInInspector] public bool autoDataLoad;                            // initilly false, set to true in Player and LifeManager is enabled
 
     private static GameManager _instance;
     public static GameManager Instance { get { return _instance; } }
@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         //LoadJsonData();
-        updated = false;
+        autoDataLoad = false;
     }
 
     private void OnEnable()
@@ -44,34 +44,25 @@ public class GameManager : MonoBehaviour
         // if file not exist then create data file to save the game data
         SaveData.Instance.FileCreation<PlayerData>(_playerData, playerDataFileName);
         SaveData.Instance.FileCreation<EnemyData>(_enemyData, enemyDataFileName);
-
-        LoadJsonData();                               // load data from json file, call last in Start() for proper population
     }
 
     void Update()
     {
         //test
         // save data to json
-        if (Input.GetKeyDown(KeyCode.K))
-        {
+        if (Input.GetKeyDown(KeyCode.K)) {
             PopulateSaveData();
             SaveJsonData();
         }
 
         //test
-        // load data from json
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            LoadJsonData();
-        }
-
-        // When game starts populate from json data to game
-        // To check if Player and LifeManager is enabled then populate it with data 
-        if (!updated) {
-            if (_player.enabled && LifeManager.Instance.enabled) {              /// add checks to enemy also
-                LoadFromPlayerSaveData();
-                updated = !updated;
-                Debug.Log("updated = " + updated);
+        // When game starts populate from json data to game ; initial automatic load using bool autoDataLoad
+        // if L is clicked or the player, LifeManager and enemy is enabled, then populate it with data by loading json
+        if (Input.GetKeyDown(KeyCode.L) || !autoDataLoad) {             // here !autoDataLoad bcos only need to automatically check once when all GO is enabled
+            if (_player.enabled && LifeManager.Instance.enabled){       // add checks to enemy also
+                LoadJsonData();
+                autoDataLoad = true;
+                Debug.Log("updated = " + autoDataLoad);
             }
         }
     }
@@ -94,7 +85,7 @@ public class GameManager : MonoBehaviour
 
 
     public void PopulateSaveData() {
-        PopulatePlayerSaveData();
+        PopulateToPlayerSaveData();
     }
 
     // Save data to Json
@@ -107,14 +98,12 @@ public class GameManager : MonoBehaviour
     public void LoadJsonData() {
         _playerData = SaveData.Instance.Load<PlayerData>(playerDataFileName);
         _enemyData = SaveData.Instance.Load<EnemyData>(enemyDataFileName);
-
-        if (updated)
-            LoadFromPlayerSaveData();
+        LoadFromPlayerSaveData();
     }
 
 
     // Populate data with values for saving to Json, called before saving to Json
-    public void PopulatePlayerSaveData() {
+    public void PopulateToPlayerSaveData() {
         _playerData.health = _player.Health;
         _playerData.life = LifeManager.Instance.life;
     }

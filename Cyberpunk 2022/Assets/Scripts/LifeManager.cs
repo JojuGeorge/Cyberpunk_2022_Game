@@ -29,7 +29,7 @@ public class LifeManager : MonoBehaviour
     public void GiveLife() {
         if (life < maxLife) {
             life++;
-            GameManager.Instance.PopulatePlayerSaveData();
+            GameManager.Instance.PopulateToPlayerSaveData();
         }
     }
 
@@ -40,7 +40,7 @@ public class LifeManager : MonoBehaviour
             life = 0;
             Debug.Log("GAME OVER!!!!!!!!!!!!!");
         }
-        GameManager.Instance.PopulatePlayerSaveData();
+        GameManager.Instance.PopulateToPlayerSaveData();
     }
 
 

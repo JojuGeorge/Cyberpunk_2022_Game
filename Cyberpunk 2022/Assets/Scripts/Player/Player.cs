@@ -120,6 +120,6 @@ public class Player : MonoBehaviour, IDamageable
 
             // if there is more life for player then reset player in GameManager
         }
-        GameManager.Instance.PopulatePlayerSaveData();
+        GameManager.Instance.PopulateToPlayerSaveData();
     }
 }
