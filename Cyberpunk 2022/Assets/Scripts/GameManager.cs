@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public string enemyDataFileName;
 
     [SerializeField] private float _respawnDelay;
+    [SerializeField] private GameObject _gameOverScreen;
 
     private Player _player;
     private PlayerData _playerData;
@@ -113,5 +114,10 @@ public class GameManager : MonoBehaviour
         _player.Health = _playerData.health;
         LifeManager.Instance.life = _playerData.life;
         LifeManager.Instance.maxLife = _playerData.maxLife;
+    }
+
+    // Called from LifeManager when player life is over
+    public void GameOver() {
+        _gameOverScreen.SetActive(true);
     }
 }

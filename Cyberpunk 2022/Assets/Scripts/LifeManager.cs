@@ -39,6 +39,7 @@ public class LifeManager : MonoBehaviour
         if (life < 1) {
             life = 0;
             Debug.Log("GAME OVER!!!!!!!!!!!!!");
+            GameManager.Instance.GameOver();
         }
         GameManager.Instance.PopulateToPlayerSaveData();
     }

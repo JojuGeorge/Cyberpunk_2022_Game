@@ -7,7 +7,7 @@ public class PauseMenu : MonoBehaviour
 {
     [SerializeField] private GameObject _pauseMenu;
     [SerializeField] private string _mainMenu;
-    [SerializeField] private string _levelName;             // Automatically get the current level for Retry
+    [SerializeField] private string _thisLevelName;             // Automatically get the current level for Retry
 
 
     private void Update()
@@ -45,7 +45,7 @@ public class PauseMenu : MonoBehaviour
     public void Retry()
     {
         Toggle();
-        SceneManager.LoadScene(_levelName);
+        SceneManager.LoadScene(_thisLevelName);
     }
 
     public void MainMenu()
