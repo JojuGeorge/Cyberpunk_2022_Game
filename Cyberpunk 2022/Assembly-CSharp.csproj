@@ -73,6 +73,7 @@
     <Compile Include="Assets\Scripts\Menus\MainMenu.cs" />
     <Compile Include="Assets\Scripts\Menus\PauseMenu.cs" />
     <Compile Include="Assets\Scripts\Menus\GameOver.cs" />
+    <Compile Include="Assets\Scripts\SceneSwap\DataInitialization.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\JsonDotNet\link.xml" />
