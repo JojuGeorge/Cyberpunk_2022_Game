@@ -1,14 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
+using Newtonsoft.Json;
 
 public class DataInitialization : MonoBehaviour
 {
     public string playerDataFileName;
     public string enemyDataFileName;
 
+    private SaveData _saveData;
     private PlayerData _playerData;
     private EnemyData _enemyData;
+    private bool _dataLoaded;
 
 
     private static DataInitialization _instance;
@@ -17,10 +21,8 @@ public class DataInitialization : MonoBehaviour
 
     private void Awake()
     {
+
         DontDestroyOnLoad(this.gameObject);
-        _playerData = new PlayerData();
-        _enemyData = new EnemyData();
-        LoadJsonData();
     }
 
     private void OnEnable()
@@ -31,18 +33,32 @@ public class DataInitialization : MonoBehaviour
         }
     }
 
-    // Load data from Json
+    private void Start()
+    {
+        _dataLoaded = false;
+        _saveData = new SaveData();
+        _playerData = new PlayerData();
+        _enemyData = new EnemyData();
+        LoadJsonData();
+    }
+
+    // Load data from Json  // Check before loadin if the file is created
     public void LoadJsonData()
     {
-        _playerData = SaveData.Instance.Load<PlayerData>(playerDataFileName);
-        _enemyData = SaveData.Instance.Load<EnemyData>(enemyDataFileName);
+        _playerData = _saveData.Load<PlayerData>(playerDataFileName);
+        _enemyData = _saveData.Load<EnemyData>(enemyDataFileName);
+        _dataLoaded = true;
     }
 
     // Reset All Data
     public void ResetAllData()
     {
-        PlayerDataReset();
-        EnemyDataReset();
+        if (_dataLoaded)
+        {
+            PlayerDataReset();
+            EnemyDataReset();
+            SaveJsonData();
+        }
     }
 
     // Reset All Player Data
@@ -57,4 +73,13 @@ public class DataInitialization : MonoBehaviour
     {
         _enemyData.health = _enemyData.maxHealth;
     }
+
+    public void SaveJsonData()
+    {
+        _saveData.Save<PlayerData>(_playerData, playerDataFileName);
+        _saveData.Save<EnemyData>(_enemyData, enemyDataFileName);
+        Debug.Log("SAVED");
+    }
+
+
 }

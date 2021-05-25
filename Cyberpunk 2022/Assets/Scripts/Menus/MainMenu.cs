@@ -26,10 +26,10 @@ public class MainMenu : MonoBehaviour
 }
 // Here if player is playing for the 1st time then the Reset all data is not needed bcos
 // 1) since the data.json is only created after knowing the player attibutes at runtime by gameManager and created when gameManager starts
-//      it will cause error
+//      it will cause error also
 // 2) No need to reset data as initially all data is resetted
 // ELSE Reset All data is needed as player already played and all the needed data.json file is created
 // TWO WAYS TO SOLVE
-// 1) Check if already the json file is created and then only reset the data
-// 2) Create all needed json data at starting of game at mainMenu itselt(hard, since attributes are needed to be setup) - not feasible
+// 1) Check if already the json file is created and then only reset the data , by reading the folder
+// 2) Create all needed json data at starting of game at mainMenu itself MANUALLY(hard, since attributes are needed to be setup) - not feasible
 //      as we might need to save some data only based on gameplay

@@ -13,8 +13,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _gameOverScreen;
 
     private Player _player;
+    private SaveData _saveData;
     private PlayerData _playerData;
     private EnemyData _enemyData;
+
     
     [HideInInspector] public bool autoDataLoad;                            // initilly false, set to true in Player and LifeManager is enabled
 
@@ -39,12 +41,13 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         _player = FindObjectOfType<Player>();
+        _saveData = new SaveData();
         _playerData = new PlayerData();
         _enemyData = new EnemyData();
 
         // if file not exist then create data file to save the game data
-        SaveData.Instance.FileCreation<PlayerData>(_playerData, playerDataFileName);
-        SaveData.Instance.FileCreation<EnemyData>(_enemyData, enemyDataFileName);
+        _saveData.FileCreation<PlayerData>(_playerData, playerDataFileName);
+        _saveData.FileCreation<EnemyData>(_enemyData, enemyDataFileName);
     }
 
     void Update()
@@ -91,14 +94,14 @@ public class GameManager : MonoBehaviour
 
     // Save data to Json
     public void SaveJsonData() {
-        SaveData.Instance.Save<PlayerData>(_playerData, playerDataFileName);
-        SaveData.Instance.Save<EnemyData>(_enemyData, enemyDataFileName);               //test enemy part not complete
+        _saveData.Save<PlayerData>(_playerData, playerDataFileName);
+        _saveData.Save<EnemyData>(_enemyData, enemyDataFileName);               //test enemy part not complete
     }
 
     // Load data from Json
     public void LoadJsonData() {
-        _playerData = SaveData.Instance.Load<PlayerData>(playerDataFileName);
-        _enemyData = SaveData.Instance.Load<EnemyData>(enemyDataFileName);
+        _playerData = _saveData.Load<PlayerData>(playerDataFileName);
+        _enemyData = _saveData.Load<EnemyData>(enemyDataFileName);
         LoadFromPlayerSaveData();
     }
 

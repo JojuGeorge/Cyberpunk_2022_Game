@@ -5,19 +5,19 @@ using Newtonsoft.Json;
 using System.IO;
 using System;
 
-public class SaveData : MonoBehaviour
+public class SaveData //: MonoBehaviour
 {
-    private static SaveData _instance;
-    public static SaveData Instance { get { return _instance; } }
+    //private static SaveData _instance;
+    //public static SaveData Instance { get { return _instance; } }
 
     private string destination;
-    private void OnEnable()
-    {
-        if (_instance == null)
-        {
-            _instance = this;
-        }
-    }
+    //private void OnEnable()
+    //{
+    //    if (_instance == null)
+    //    {
+    //        _instance = this;
+    //    }
+    //}
 
     public void Save<T>( T dataObject, string fileName) where T: class
     {
