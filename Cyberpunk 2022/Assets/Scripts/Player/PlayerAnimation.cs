@@ -19,7 +19,7 @@ public class PlayerAnimation : MonoBehaviour
         _animator.SetBool("Run", run);
     }
 
-    public void PistolShooting() {
-        _animator.SetTrigger("PistolShooting");
+    public void ShootingPistol() {
+        _animator.SetTrigger("ShootingPistol");
     }
 }

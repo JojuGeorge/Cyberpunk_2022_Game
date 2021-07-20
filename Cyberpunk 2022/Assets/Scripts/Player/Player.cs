@@ -50,12 +50,10 @@ public class Player : MonoBehaviour, IDamageable
         }
 
 
-
+        // Shooting animation
         if (Input.GetButton("Fire1")) {
-            _playerAnimation.PistolShooting();
+            _playerAnimation.ShootingPistol();
         }
-
-
     }
 
 
@@ -77,8 +75,8 @@ public class Player : MonoBehaviour, IDamageable
         }
 
         _playerAnimation.Walk(_moveX);      // for plaer walk animation
-        Debug.Log("MOVE SPEED =======" + _moveX);
 
+        // For Running. Player speed is increased and Run animation is played when on pressing down the shift button continously
         if (Input.GetKey(KeyCode.LeftShift))
         {
             _rb.velocity = new Vector2(_moveX * _runSpeed, _rb.velocity.y);
