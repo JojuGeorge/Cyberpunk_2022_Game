@@ -7,7 +7,8 @@ public class Player : MonoBehaviour, IDamageable
     [HideInInspector] public Rigidbody2D _rb;
     public int Health { get; set; }                         // Player Health is initialized in the GameManager.LoadFromPlayerSaveData()
 
-    [SerializeField] private float _moveSpeed;
+    [SerializeField] private float _walkSpeed;
+    [SerializeField] private float _runSpeed;
     [SerializeField] private float _jumpForce;
     [SerializeField] private LayerMask _groundLayerMask;
     [SerializeField] private float _groundCheckDistance;
@@ -16,20 +17,20 @@ public class Player : MonoBehaviour, IDamageable
     private float _moveX;                                   // Gets the movement vector; For flipping the player faceing direction
     private bool _isGrounded;
     private bool _doubleJump = false;
+    private PlayerAnimation _playerAnimation;               // For managing player animations - script attached to the same playerGO
 
     private int faceingDir = 1;      // 1 == right, -1 == left;
 
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _playerAnimation = FindObjectOfType<PlayerAnimation>();
     }
 
 
     void Update()
     {
         _isGrounded = CheckIfGrounded();
-
-       
     }
 
     private void FixedUpdate()
@@ -47,12 +48,20 @@ public class Player : MonoBehaviour, IDamageable
             _doubleJump = false;
             Jump();
         }
+
+
+
+        if (Input.GetButton("Fire1")) {
+            _playerAnimation.PistolShooting();
+        }
+
+
     }
 
 
     // Player movement
     private void Movement() {
-        _moveX = Input.GetAxisRaw("Horizontal") * _moveSpeed;
+        _moveX = Input.GetAxisRaw("Horizontal") * _walkSpeed;
         _rb.velocity = new Vector2(_moveX, _rb.velocity.y);
 
         // To find which way is the player looking
@@ -66,6 +75,20 @@ public class Player : MonoBehaviour, IDamageable
             Flip(false);
             faceingDir = -1;
         }
+
+        _playerAnimation.Walk(_moveX);      // for plaer walk animation
+        Debug.Log("MOVE SPEED =======" + _moveX);
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            _rb.velocity = new Vector2(_moveX * _runSpeed, _rb.velocity.y);
+            _playerAnimation.Run(true);
+        }
+        else {
+            _playerAnimation.Run(false);
+        }
+   
+
     }
 
 
