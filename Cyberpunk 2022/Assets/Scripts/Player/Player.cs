@@ -51,7 +51,7 @@ public class Player : MonoBehaviour, IDamageable
 
 
         // Shooting animation
-        if (Input.GetButton("Fire1")) {
+        if (Input.GetButtonDown("Fire1")) {
             _playerAnimation.ShootingPistol();
         }
     }
