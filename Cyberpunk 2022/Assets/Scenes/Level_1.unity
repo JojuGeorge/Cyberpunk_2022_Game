@@ -284,7 +284,6 @@ MonoBehaviour:
     m_Bits: 128
   _groundCheckDistance: 1.2
   _playerBody: {fileID: 978065787}
-  clickCount: 0
 --- !u!114 &67072770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1882,6 +1881,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12bdd5728009a27449ccee079e982b83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  multiplePistolShotAnim: Shooting_Pistol_02
 --- !u!114 &895853653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1903,7 +1903,6 @@ MonoBehaviour:
     m_Bits: 128
   _groundCheckDistance: 1.2
   _playerBody: {fileID: 1566519361}
-  clickCount: 0
 --- !u!50 &895853654
 Rigidbody2D:
   serializedVersion: 4
@@ -1937,6 +1936,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ae6ad5ae0eb0a8468ee5dc364d22bd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clicked: 0
+  clickedTime: 0
+  pistolShotDelay: 1
 --- !u!1 &912111834
 GameObject:
   m_ObjectHideFlags: 0

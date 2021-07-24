@@ -73,6 +73,7 @@ public class Player : MonoBehaviour, IDamageable
 
         _playerAnimation.Walk(_moveX);      // for plaer walk animation
 
+
         // For Running. Player speed is increased and Run animation is played when on pressing down the shift button continously
         if (Input.GetKey(KeyCode.LeftShift))
         {
@@ -82,7 +83,9 @@ public class Player : MonoBehaviour, IDamageable
         else {
             _playerAnimation.Run(false);
         }
-   
+
+
+
 
     }
 

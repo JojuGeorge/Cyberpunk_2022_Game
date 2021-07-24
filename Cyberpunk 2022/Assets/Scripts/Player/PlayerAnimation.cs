@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerAnimation : MonoBehaviour
 {
     private Animator _animator;
+    public string multiplePistolShotAnim;
 
     private void Start()
     {
@@ -21,5 +22,15 @@ public class PlayerAnimation : MonoBehaviour
 
     public void ShootingPistol() {
         _animator.SetTrigger("ShootingPistol");
+
+    }
+
+    // for continous fireing
+    //public void MultiplePistolShot() {
+    //   // _animator.Play(multiplePistolShotAnim);
+    //}
+
+    public void AimGun(bool _value) {
+        _animator.SetBool("AimGun", _value);
     }
 }
