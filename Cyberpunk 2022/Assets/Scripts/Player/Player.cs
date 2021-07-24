@@ -18,6 +18,7 @@ public class Player : MonoBehaviour, IDamageable
     private bool _isGrounded;
     private bool _doubleJump = false;
     private PlayerAnimation _playerAnimation;               // For managing player animations - script attached to the same playerGO
+    private PlayerAttack _playerAttack;                     // For managing player attacks - shoot anim is done in this cs file - script attached to the same playerGO
 
     private int faceingDir = 1;      // 1 == right, -1 == left;
 
@@ -25,6 +26,7 @@ public class Player : MonoBehaviour, IDamageable
     {
         _rb = GetComponent<Rigidbody2D>();
         _playerAnimation = FindObjectOfType<PlayerAnimation>();
+        _playerAttack = FindObjectOfType<PlayerAttack>();
     }
 
 
@@ -49,11 +51,6 @@ public class Player : MonoBehaviour, IDamageable
             Jump();
         }
 
-
-        // Shooting animation
-        if (Input.GetButtonDown("Fire1")) {
-            _playerAnimation.ShootingPistol();
-        }
     }
 
 

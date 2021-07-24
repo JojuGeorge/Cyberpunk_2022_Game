@@ -284,6 +284,7 @@ MonoBehaviour:
     m_Bits: 128
   _groundCheckDistance: 1.2
   _playerBody: {fileID: 978065787}
+  clickCount: 0
 --- !u!114 &67072770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1846,6 +1847,7 @@ GameObject:
   - component: {fileID: 895853654}
   - component: {fileID: 895853653}
   - component: {fileID: 895853652}
+  - component: {fileID: 895853655}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -1901,6 +1903,7 @@ MonoBehaviour:
     m_Bits: 128
   _groundCheckDistance: 1.2
   _playerBody: {fileID: 1566519361}
+  clickCount: 0
 --- !u!50 &895853654
 Rigidbody2D:
   serializedVersion: 4
@@ -1922,6 +1925,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &895853655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 895853650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ae6ad5ae0eb0a8468ee5dc364d22bd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &912111834
 GameObject:
   m_ObjectHideFlags: 0
@@ -3291,7 +3306,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7144309978645228549, guid: 2c41ddfd5cafc254da237ea97a7cb16d, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -6955221793536854445, guid: 2c41ddfd5cafc254da237ea97a7cb16d, type: 3}
       propertyPath: m_Layer
