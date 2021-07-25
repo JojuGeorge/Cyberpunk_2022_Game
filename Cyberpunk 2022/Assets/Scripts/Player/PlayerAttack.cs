@@ -43,11 +43,11 @@ public class PlayerAttack : MonoBehaviour
             MultipleShot();
         }
 
+        //reset
         if (Time.time - clickedTime > pistolShotDelay)
         {
             clicked = 0;
             _animator.SetBool("MultipleShots", false);
-           // _animator.SetBool("SingleShot", false);
         }
 
         if (_animator.GetFloat("WalkSpeed") >= 1)
@@ -62,14 +62,15 @@ public class PlayerAttack : MonoBehaviour
             _animator.SetTrigger("ShootingPistol");
         else
             _animator.Play("Shooting_Pistol_02");
-
-        //  _animator.SetBool("SingleShot", true);
     }
 
     public void MultipleShot() {
         Debug.Log("Multiple shot");
-
-         _animator.SetBool("MultipleShots", true);
+        //  _animator.SetBool("MultipleShots", true);
+        while (clicked > 0 ) {
+            _animator.Play("Shooting_Pistol_02");
+            clicked--;
+        }
 
     }
 }
