@@ -34,7 +34,6 @@ public class PlayerAttack : MonoBehaviour
                 SingleShot();
                 _animator.SetBool("AimGun", true);
 
-
             }
         }
 
@@ -48,25 +47,29 @@ public class PlayerAttack : MonoBehaviour
         {
             clicked = 0;
             _animator.SetBool("MultipleShots", false);
-            _animator.SetBool("SingleShot", false);
+           // _animator.SetBool("SingleShot", false);
         }
+
+        if (_animator.GetFloat("WalkSpeed") >= 1)
+            _animator.SetBool("AimGun", false);
 
     }
 
     public void SingleShot() {
         Debug.Log("Single shot" + (Time.time - clickedTime));
-        _animator.SetTrigger("ShootingPistol");
-        _animator.SetBool("SingleShot", true);
+
+        if(!_animator.GetBool("AimGun"))
+            _animator.SetTrigger("ShootingPistol");
+        else
+            _animator.Play("Shooting_Pistol_02");
+
+        //  _animator.SetBool("SingleShot", true);
     }
 
     public void MultipleShot() {
         Debug.Log("Multiple shot");
-        //while (clicked > 0)
-        //{
-        //    _playerAnimation.MultiplePistolShot();
-        //    clicked--;
-        //}
-       //  _animator.SetBool("MultipleShots", true);
+
+         _animator.SetBool("MultipleShots", true);
 
     }
 }
