@@ -20,16 +20,6 @@ public class PlayerAnimation : MonoBehaviour
         _animator.SetBool("Run", run);
     }
 
-    public void ShootingPistol() {
-        _animator.SetTrigger("ShootingPistol");
-
-    }
-
-    // for continous fireing
-    //public void MultiplePistolShot() {
-    //   // _animator.Play(multiplePistolShotAnim);
-    //}
-
     public void AimGun(bool _value) {
         _animator.SetBool("AimGun", _value);
     }

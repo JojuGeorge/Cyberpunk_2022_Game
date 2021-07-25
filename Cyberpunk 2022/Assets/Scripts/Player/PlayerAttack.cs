@@ -27,49 +27,23 @@ public class PlayerAttack : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            clicked++;
-            if (clicked == 1)
+            if (!_animator.GetBool("AimGun"))
             {
-                clickedTime = Time.time;
-                SingleShot();
+                _animator.SetBool("PistolFire", true);
                 _animator.SetBool("AimGun", true);
-
+            }
+            else {
+                _animator.SetBool("PistolFire", false);
+                _animator.Play("Shooting_Pistol_02");
             }
         }
 
 
-        else if (clicked > 1 && Time.time - clickedTime < pistolShotDelay)
-        {
-            MultipleShot();
-        }
-
-        //reset
-        if (Time.time - clickedTime > pistolShotDelay)
-        {
-            clicked = 0;
-            _animator.SetBool("MultipleShots", false);
-        }
-
         if (_animator.GetFloat("WalkSpeed") >= 1)
+        {
             _animator.SetBool("AimGun", false);
+            _animator.SetBool("PistolFire", false);
 
-    }
-
-    public void SingleShot() {
-        Debug.Log("Single shot" + (Time.time - clickedTime));
-
-        if(!_animator.GetBool("AimGun"))
-            _animator.SetTrigger("ShootingPistol");
-        else
-            _animator.Play("Shooting_Pistol_02");
-    }
-
-    public void MultipleShot() {
-        Debug.Log("Multiple shot");
-        //  _animator.SetBool("MultipleShots", true);
-        while (clicked > 0 ) {
-            _animator.Play("Shooting_Pistol_02");
-            clicked--;
         }
 
     }
