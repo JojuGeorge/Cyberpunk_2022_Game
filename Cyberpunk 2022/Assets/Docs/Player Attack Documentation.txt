@@ -1,0 +1,32 @@
+PLAYER ATTACK
+
+** Gun types
+	pistol	(small) 
+	Rifle, machine guns, sci-fi large gune	(large)
+	
+** Animation
+	Small Gun
+		taking
+		shooting	with idle or walk or run	
+		aiming		with idle walk or run
+		Idle		player goes to idle by lowering arms - happens when player starts to move, else will be in aiming pose
+	
+	
+	Large Gun
+		aiming		with idle or walk or run
+		shooting	with idle walk or run
+		
+
+** multiple gun swapping mechanics
+
+** Mechanics
+when clicking on fire then
+	* for small guns selected, by default idle anim only. And on clicking fire then shoot then in aim pose until the player walks, then goes to idle
+	* for large guns selected, by default goes to aiming pose. And on clicking fire button then shooting animation, then aiming
+	
+	set shoot parameter as true - GENERIC?
+		or for pistol and large guns different boolean parameter for animation??
+		(based on large or small gun do respective animations)??
+	
+	Based on Gun selected do animation ???
+	

@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    public int clicked;
-    public float clickedTime;
-    public float pistolShotDelay;
-
     private PlayerAnimation _playerAnimation;                   // For player animations
     private Animator _animator;
 
