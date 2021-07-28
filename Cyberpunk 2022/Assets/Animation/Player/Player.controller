@@ -133,9 +133,6 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 2
-    m_ConditionEvent: PistolFire
-    m_EventTreshold: 0
   - m_ConditionMode: 1
     m_ConditionEvent: AimGun
     m_EventTreshold: 0
@@ -147,7 +144,7 @@ AnimatorStateTransition:
   serializedVersion: 3
   m_TransitionDuration: 0
   m_TransitionOffset: 0
-  m_ExitTime: 0.9
+  m_ExitTime: 1
   m_HasExitTime: 1
   m_HasFixedDuration: 0
   m_InterruptionSource: 0
@@ -865,7 +862,7 @@ AnimatorStateMachine:
     m_Position: {x: -30, y: -310, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3371810065966228738}
-    m_Position: {x: 380, y: -180, z: 0}
+    m_Position: {x: 330, y: -180, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3020637262170715408}
     m_Position: {x: 630, y: -180, z: 0}
