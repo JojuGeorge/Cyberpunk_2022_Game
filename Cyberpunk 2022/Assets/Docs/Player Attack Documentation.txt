@@ -8,13 +8,16 @@ PLAYER ATTACK
 	Small Gun
 		taking
 		shooting	with idle or walk or run	
-		aiming		with idle walk or run
+		aiming		with idle walk or run 		// in current implementation aiming is turned off when player walks -  there fore aiming while running - needs
+													new mechanics????
+												
 		Idle		player goes to idle by lowering arms - happens when player starts to move, else will be in aiming pose
 	
 	
 	Large Gun
 		aiming		with idle or walk or run
 		shooting	with idle walk or run
+			// Single shot && Auto shot option needed
 		
 
 ** multiple gun swapping mechanics
@@ -22,6 +25,10 @@ PLAYER ATTACK
 ** Mechanics
 when clicking on fire then
 	* for small guns selected, by default idle anim only. And on clicking fire then shoot then in aim pose until the player walks, then goes to idle
+		// but then no (aim | shoot) + walk for pistol - new mechanics?
+		// One idea is to add a null slot, so player speed with gun | aiming is slow, but with empty more speed???  -- mobile version?
+		// aim -> idle ? aim + walk ?
+	
 	* for large guns selected, by default goes to aiming pose. And on clicking fire button then shooting animation, then aiming
 	
 	set shoot parameter as true - GENERIC?
@@ -30,3 +37,19 @@ when clicking on fire then
 	
 	Based on Gun selected do animation ???
 	
+	
+** Gun Mechanics
+	WeaponSlots = null && Pistol && AutomaticGun && LargeGun
+	
+	if (WeaponSelected == null ){
+		Normal idle;
+		Normal Walk;
+		Normal Run;
+		Walk && Run speed == MAX
+	}
+	if (WeaponSelected == Pistol || AutomaticGuns || LargeGuns){
+		Gun aim idle
+		Gun aim Walk + Shooting
+		Gun aim Run + Shooting
+		Walk && Run speed < MaxSpeed
+	}
