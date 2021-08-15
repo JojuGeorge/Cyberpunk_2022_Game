@@ -4,49 +4,49 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    private PlayerAnimation _playerAnimation;                   // For player animations
     private Animator _animator;
+
+    [SerializeField] private int _currentWeaponIndex = 1;
+    [SerializeField] private int _maxWeaponTypes = 3;
 
     void Start()
     {
-        _playerAnimation = FindObjectOfType<PlayerAnimation>();
         _animator = GetComponentInChildren<Animator>();
-
     }
 
     void Update()
     {
-        
+        WeaponSelector();   
     }
 
     private void FixedUpdate()
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            // if player is not already aiming the gun, then idle -> gun pose + shooting -> aim pose and stops at aim pose
-            // bcos if already aiming then no need to do idle -> gun pose :)
-            // "PistolFire" == true does idle -> gun pose + shooting -> aim pose
-            //if (!_animator.GetBool("AimGun"))
-            //{
-            //    _animator.SetBool("PistolFire", true);
-            //    _animator.SetBool("AimGun", true);
-            //}
-            // if aready in gun pose, then just shoot, no need to do idle -> gunpose + shooring
-            //else {
-            //    _animator.SetBool("PistolFire", false);
-            //    _animator.Play("Shooting_Pistol_02");           // plays the fireing animation
-            //}
             _animator.Play("Shooting_Pistol_02");           // plays the fireing animation
-
         }
+    }
 
-
-        // While in aimpose if player starts to walk then stop gun aim pose
-        if (_animator.GetFloat("WalkSpeed") >= 1)
-        {
-            _animator.SetBool("AimGun", false);
-            _animator.SetBool("PistolFire", false);
-
+    // Weapon selection using mouse scroll
+    private void WeaponSelector()
+    {
+        if (Input.GetAxisRaw("Mouse ScrollWheel") > 0) {
+            if (_currentWeaponIndex < _maxWeaponTypes)
+            {
+                _currentWeaponIndex++;
+            }
+            else if (_currentWeaponIndex >= _maxWeaponTypes) {
+                _currentWeaponIndex = 1;
+            }
+        }else if (Input.GetAxisRaw("Mouse ScrollWheel") < 0) {
+            if (_currentWeaponIndex > 1)
+            {
+                _currentWeaponIndex--;
+            }
+            else if (_currentWeaponIndex <= 1)
+            {
+                _currentWeaponIndex = _maxWeaponTypes;
+            }
         }
 
     }
