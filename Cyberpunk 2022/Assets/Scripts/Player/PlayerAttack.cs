@@ -8,6 +8,9 @@ public class PlayerAttack : MonoBehaviour
 
     [SerializeField] private int _currentWeaponIndex = 1;
     [SerializeField] private int _maxWeaponTypes = 3;
+    [SerializeField] private string[] _weaponList;
+    [SerializeField] private string _selectedWeapon;
+    [SerializeField] private bool _automaticGun;
 
     void Start()
     {
@@ -16,15 +19,23 @@ public class PlayerAttack : MonoBehaviour
 
     void Update()
     {
-        WeaponSelector();   
+        WeaponSelector();
+        CurrentWeaponFireing();
     }
 
     private void FixedUpdate()
     {
-        if (Input.GetButtonDown("Fire1"))
+        // plays the fireing animation "Shooting_Pistol_02", "Shooting_Large_Gun"
+        if (Input.GetButtonDown("Fire1") && !_automaticGun)
         {
-            _animator.Play("Shooting_Pistol_02");           // plays the fireing animation
+            _animator.Play(_selectedWeapon);
         }
+ 
+        if (Input.GetButton("Fire1") && _automaticGun)
+        {
+            _animator.Play(_selectedWeapon);
+        }
+
     }
 
     // Weapon selection using mouse scroll
@@ -49,5 +60,34 @@ public class PlayerAttack : MonoBehaviour
             }
         }
 
+        if (_currentWeaponIndex > 2)
+            _automaticGun = true;
+        else
+            _automaticGun = false;
+
+    }
+
+    private void CurrentWeaponFireing() {
+        switch (_currentWeaponIndex) {
+            case 1:
+                _animator.SetLayerWeight(1, 0);
+                _animator.SetLayerWeight(2, 0);
+
+                break;
+            case 2:
+                _selectedWeapon = _weaponList[1];
+                _animator.SetLayerWeight(1, 1);
+                _animator.SetLayerWeight(2, 0);
+                Debug.Log(_selectedWeapon);
+                break;
+            case 3:
+                _selectedWeapon = _weaponList[2];
+                _animator.SetLayerWeight(2, 1);
+                _animator.SetLayerWeight(1, 0);
+                Debug.Log(_selectedWeapon);
+
+                break;
+
+        }
     }
 }
