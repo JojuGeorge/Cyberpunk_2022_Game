@@ -8,8 +8,8 @@ public class PlayerAttack : MonoBehaviour
 
     [SerializeField] private int _currentWeaponIndex = 0;       // Adjusted using mouse scroll for now; Based on this animator layers are enabled or disabled
     [SerializeField] private int _maxWeaponTypes = 3;           // Player max weapon capacity
-    [SerializeField] private GameObject[] _weaponList;
-    [SerializeField] private string[] _weaponAnimList;              // Store list animation name for playing it based on _currentWeaponIndex
+    [SerializeField] private GameObject[] _weaponList;          // List of weaponse GO
+    [SerializeField] private string[] _weaponAnimList;          // Store list animation name for playing it based on _currentWeaponIndex
     [SerializeField] private string _selectedWeapon;            // Currently selected weapons animation name
     [SerializeField] private bool _automaticGun;                // True if _currentWeaponIndex > 1 (for now)   // When true hold down mouse for continous shots : else one click = one fire
     
@@ -75,6 +75,7 @@ public class PlayerAttack : MonoBehaviour
         else
             _automaticGun = false;
 
+        // If not in Idle then, when the weapon enables (enabling done with animation) - then get the enabled weaponse projectileRayCast component
         if(_weaponList[_currentWeaponIndex] != null)
             projectileRayCast = _weaponList[_currentWeaponIndex].GetComponent<ProjectileRayCast>();
     }

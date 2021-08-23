@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Raycast mechanics and deal damage to GO with IDamageable interface ie BULLET
 public class ProjectileRayCast : MonoBehaviour
 {
     [SerializeField] private Transform _fireingPoint;
@@ -15,7 +16,8 @@ public class ProjectileRayCast : MonoBehaviour
 
     private void ondisable()
     {
-        _playerAttack.projectileRayCast = null;
+        // When Idle the projectileRayCast is set to null i.e when disabled
+        _playerAttack.projectileRayCast = null;     
     }
 
     void Start() {
@@ -32,6 +34,7 @@ public class ProjectileRayCast : MonoBehaviour
         RaycastHit2D hitInfo = Physics2D.Raycast(_fireingPoint.position, Vector2.right, _weaponRange);
         Debug.DrawRay(_fireingPoint.position, Vector2.right * _weaponRange, Color.red);
 
+        // If raycast is hit on something ie within the range
         if (hitInfo)
         {
             IDamageable hit = hitInfo.transform.GetComponent<IDamageable>();
