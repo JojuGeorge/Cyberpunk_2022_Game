@@ -25,7 +25,6 @@ public class EnemyTest : MonoBehaviour, IDamageable
             return;
     
         Health -= damageAmount;
-        Debug.Log("ENEMY HELATH = " + Health);
 
         if (Health < 1) {
             Debug.Log("enemy dead!!");

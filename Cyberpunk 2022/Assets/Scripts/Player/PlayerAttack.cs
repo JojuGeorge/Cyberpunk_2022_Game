@@ -14,7 +14,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private bool _automaticGun;                // True if _currentWeaponIndex > 1 (for now)   // When true hold down mouse for continous shots : else one click = one fire
     
     
-    public ProjectileRayCast projectileRayCast;
+    public ProjectileRayCast projectileRayCast = null;
 
 
     void Start()
@@ -26,7 +26,9 @@ public class PlayerAttack : MonoBehaviour
     void Update()
     {
         WeaponSelector();               // _currentWeaponIndex is set
-        CurrentWeaponFireing();         // Enables or disables animator layer based on the _currentWeaponIndex  // Also sets the _selecteWeapon - i.e animation name
+
+        if(Mathf.Abs(Input.GetAxisRaw("Mouse ScrollWheel")) > 0)
+            CurrentWeaponFireing();         // Enables or disables animator layer based on the _currentWeaponIndex  // Also sets the _selecteWeapon - i.e animation name
 
     }
 
@@ -36,13 +38,15 @@ public class PlayerAttack : MonoBehaviour
         if (Input.GetButtonDown("Fire1") && !_automaticGun)
         {
             _animator.Play(_selectedWeapon);
-            projectileRayCast.Shoot();
+            if(projectileRayCast != null )          // so that when in idel the projectileRayCast is null therefore no shoot option
+                projectileRayCast.Shoot();
         }
  
         if (Input.GetButton("Fire1") && _automaticGun)
         {
             _animator.Play(_selectedWeapon);
-            projectileRayCast.Shoot();
+            if (projectileRayCast != null)
+                projectileRayCast.Shoot();
         }
 
     }
@@ -76,8 +80,10 @@ public class PlayerAttack : MonoBehaviour
             _automaticGun = false;
 
         // If not in Idle then, when the weapon enables (enabling done with animation) - then get the enabled weaponse projectileRayCast component
-        if(_weaponList[_currentWeaponIndex] != null)
+        if (_weaponList[_currentWeaponIndex] != null)
             projectileRayCast = _weaponList[_currentWeaponIndex].GetComponent<ProjectileRayCast>();
+        else
+            projectileRayCast = null;
     }
 
     // Enables animation layer and assigns the animation name in _selectedWeapon
@@ -101,7 +107,7 @@ public class PlayerAttack : MonoBehaviour
     // Here if layerIndex == 0 then all animator layers from 1 to end, player weight will be set to 0
     private void EnableAnimatorLayer(int layerIndex) {
 
-        for (int i = 1; i <= _weaponAnimList.Length; i++) {
+        for (int i = 1; i < _weaponAnimList.Length; i++) {
             if (i != layerIndex) {
                 _animator.SetLayerWeight(i, 0);
             }
