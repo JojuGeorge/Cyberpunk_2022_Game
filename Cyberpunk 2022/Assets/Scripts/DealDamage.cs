@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 // Script to deal damage to the GO that collides with the GO with this script
-public class Attack : MonoBehaviour
+public class DealDamage : MonoBehaviour
 {
     [SerializeField]
     private int _damageAmount;                  // Damage to be done to the other GO
@@ -15,6 +15,7 @@ public class Attack : MonoBehaviour
 
         IDamageable hit = other.GetComponent<IDamageable>();
 
+        // check if the collided GO is damageable i.e have IDamageable interface to get damaged
         if(hit != null && _canDamage){
             hit.Damage(_damageAmount);
             _canDamage = false;

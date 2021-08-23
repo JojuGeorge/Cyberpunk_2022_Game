@@ -8,6 +8,7 @@ TagManager:
   - Damageable
   - Projectile
   - Ground
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Checkpoint
   - Damageable
   - Projectile
-  - 
+  - Enemy
   - 
   - 
   - 

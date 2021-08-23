@@ -110,7 +110,6 @@ public class Player : MonoBehaviour, IDamageable
         // Create a raycast from player position to under its feet
         RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, Vector2.down, _groundCheckDistance, _groundLayerMask.value);
         Debug.DrawRay(transform.position, Vector2.down * _groundCheckDistance, Color.red);        // Draws the raycast line
-
         // if on ground
         if (hitInfo.collider != null)
         {
