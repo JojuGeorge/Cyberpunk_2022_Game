@@ -109,9 +109,9 @@ ScriptedImporter:
     internalID: 0
     spriteBone:
     - name: r_handB
-      position: {x: 1.2699814, y: 4.269493, z: 0}
-      rotation: {x: 0, y: 0, z: 0.58566964, w: -0.8105499}
-      length: 3.8730333
+      position: {x: 1.2699814, y: 4.2694817, z: 0}
+      rotation: {x: 0, y: 0, z: 0.58566964, w: -0.81054986}
+      length: 3.8730338
       parentId: -1
     spriteOutline: []
     vertices:
@@ -265,9 +265,9 @@ ScriptedImporter:
     internalID: 0
     spriteBone:
     - name: r_forearmB
-      position: {x: 2.0309448, y: 9.197372, z: 0}
-      rotation: {x: 0, y: 0, z: 0.47364065, w: -0.88071823}
-      length: 9.50257
+      position: {x: 2.0309448, y: 9.197357, z: 0}
+      rotation: {x: 0, y: 0, z: 0.47364107, w: -0.880718}
+      length: 9.50256
       parentId: -1
     spriteOutline: []
     vertices:
@@ -475,8 +475,8 @@ ScriptedImporter:
     spriteBone:
     - name: r_upperarmB
       position: {x: 5.328911, y: 16.793121, z: 0}
-      rotation: {x: 0, y: 0, z: 0.7601068, w: -0.6497982}
-      length: 14.775528
+      rotation: {x: 0, y: 0, z: 0.76010686, w: -0.6497982}
+      length: 14.775541
       parentId: -1
     spriteOutline: []
     vertices:
@@ -4584,17 +4584,17 @@ ScriptedImporter:
       parentId: -1
     - name: r_upperarmB
       position: {x: 10.485775, y: 7.0342073, z: 0}
-      rotation: {x: 0, y: -0, z: 0.996018, w: 0.089153215}
-      length: 14.775527
+      rotation: {x: 0, y: -0, z: 0.99601793, w: 0.08915322}
+      length: 14.775546
       parentId: 1
     - name: r_forearmB
-      position: {x: 14.775534, y: -0.0000059180775, z: 0}
-      rotation: {x: 0, y: 0, z: 0.3616691, w: 0.9323065}
-      length: 9.502569
+      position: {x: 14.775552, y: -0.0000039695196, z: 0}
+      rotation: {x: 0, y: 0, z: 0.36166862, w: 0.9323067}
+      length: 9.50256
       parentId: 16
     - name: r_handB
-      position: {x: 9.502563, y: -0.0000053140093, z: 0}
-      rotation: {x: 0, y: 0, z: -0.13190055, w: 0.991263}
+      position: {x: 9.502562, y: 0.000004852969, z: 0}
+      rotation: {x: 0, y: 0, z: -0.13190006, w: 0.9912631}
       length: 3.8730333
       parentId: 17
     parts:

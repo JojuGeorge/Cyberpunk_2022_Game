@@ -2,9 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/*
+ * Gun auidio is played through event in animation
+ * By default all animation layer except base layer weight layer = 0, and is set to weight=1 i.e enable on calling CurrentWeaponFireing()
+ */
 public class PlayerAttack : MonoBehaviour
 {
     private Animator _animator;
+    private PlayerAttackFX playerAttackFX;
 
     [SerializeField] private int _currentWeaponIndex = 0;       // Adjusted using mouse scroll for now; Based on this animator layers are enabled or disabled
     [SerializeField] private int _maxWeaponTypes = 3;           // Player max weapon capacity
@@ -21,6 +27,7 @@ public class PlayerAttack : MonoBehaviour
     {
         _animator = GetComponentInChildren<Animator>();
         _maxWeaponTypes = _weaponAnimList.Length - 1;               // -1 bcos 0 == idle in _weaponList, therefore only 1 less weapon
+        playerAttackFX = FindObjectOfType<PlayerAttackFX>();
     }
 
     void Update()
@@ -94,10 +101,12 @@ public class PlayerAttack : MonoBehaviour
                 break;
             case 1:
                 _selectedWeapon = _weaponAnimList[1];
+                //_weaponList[1].SetActive(true);
                 EnableAnimatorLayer(1);
                 break;
             case 2:
                 _selectedWeapon = _weaponAnimList[2];
+                //_weaponList[2].SetActive(true);
                 EnableAnimatorLayer(2);
                 break;
         }

@@ -32,7 +32,7 @@ public class ProjectileRayCast : MonoBehaviour
 
     public void Shoot() {
         RaycastHit2D hitInfo = Physics2D.Raycast(_fireingPoint.position, _fireingPoint.right, _weaponRange);
-        Debug.DrawRay(_fireingPoint.position, _fireingPoint.right * _weaponRange, Color.red);
+        Debug.DrawRay(_fireingPoint.position, _fireingPoint.right * _weaponRange, Color.green);
 
         // If raycast is hit on something ie within the range
         if (hitInfo)

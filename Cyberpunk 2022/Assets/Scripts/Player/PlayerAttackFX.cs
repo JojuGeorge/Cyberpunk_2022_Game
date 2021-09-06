@@ -14,7 +14,6 @@ public class PlayerAttackFX : MonoBehaviour
     }
     public void PistolAudio() {
         _audio.PlayOneShot(_audioClip[0]);
-        Debug.Log("shot");
     }
 
     public void AutomaticGunAudio() {
